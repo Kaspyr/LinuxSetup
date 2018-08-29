@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+### Constants ###
+bright=$1
+
+### Functions ###
+file_loop()
+{
+    for x in $(cat /home/vsage/.logs/monitors)
+    do
+        $(display)
+    done
+}
+
+display()
+{
+    xrandr --output $x --brightness $bright
+}
+
+
+### Main ###
+if [ "$1" != "" ]  && [ "$@" > '2' ]; then
+    counter=1
+    while [ $counter -le "$#" ]
+    do
+        $(file_loop)
+        ((counter+=1))
+    done
+rm 2
+    
+else 
+    echo "Please type in the monitor brightness"
+    exit
+fi
